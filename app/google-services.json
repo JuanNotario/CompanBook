@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "777638345014",
+    "firebase_url": "https://companbook2.firebaseio.com",
+    "project_id": "companbook2",
+    "storage_bucket": "companbook2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777638345014:android:897e64c407c659fd",
+        "android_client_info": {
+          "package_name": "com.companbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777638345014-74i418q1ue9va1chn3d09cuj91gug2ti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companbook",
+            "certificate_hash": "fa83e0256c5a3edc1b2ebd60a2ec307e83e64a99"
+          }
+        },
+        {
+          "client_id": "777638345014-bmefv9lloicgp7glj7qnqjiqr9k3kns3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx4bQQ3GQFBTlpaaO3RNZbaYrF4eQsC5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777638345014-bmefv9lloicgp7glj7qnqjiqr9k3kns3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

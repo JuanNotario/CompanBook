@@ -1,11 +1,12 @@
 package com.companbook;
 
-import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
+
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,9 +26,10 @@ public class MainActivity extends AppCompatActivity {
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogLogin dl = new DialogLogin();
 
-                dl.dialogLogin(MainActivity.this);
+                Intent intent = new Intent(MainActivity.this, Activity_registro.class);
+                startActivity(intent);
+
             }
         });
     }
