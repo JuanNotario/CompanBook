@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(MainActivity.this, "Se ha iniciado sesión correctamente", Toast.LENGTH_SHORT).show();
 
+                                            Intent intent = new Intent(MainActivity.this, Activity_Inicio_Empresas.class);
+                                            startActivity(intent);
+
                                             System.out.println("EMAIL");
                                             System.out.println(mAuth.getCurrentUser().getEmail());
 

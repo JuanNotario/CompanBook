@@ -4,9 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="221dp"
+        android:layout_height="179dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="87dp"
+        android:foregroundGravity="center"
+        tools:srcCompat="@drawable/ic_library" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="300dp"
+        android:layout_height="97dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="67dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="405dp"
+        android:text="CompanBook"
+        android:textSize="50sp"
+        app:fontFamily="sans-serif-condensed-medium" />
 
     <Button
         android:id="@+id/btnLogIn"
@@ -16,6 +44,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="0dp"
         android:layout_marginBottom="250dp"
+        android:background="@color/ColorAppClaro"
         android:text="Log In" />
 
     <Button
@@ -26,6 +55,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="0dp"
         android:layout_marginBottom="174dp"
+        android:background="@color/ColorAppClaro"
         android:text="Registrarse" />
 
     <Button
@@ -36,5 +66,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="0dp"
         android:layout_marginBottom="105dp"
+        android:background="@color/ColorAppClaro"
         android:text="Acceso Usuarios" />
+
 </RelativeLayout>

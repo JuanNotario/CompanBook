@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:gravity="center"
     android:orientation="vertical"
+    android:padding="30dp"
+    android:paddingLeft="40dp"
+    android:paddingTop="30dp"
+    android:paddingRight="40dp"
     tools:context=".Activity_registro">
 
     <TextView
@@ -70,14 +78,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="dialogLogin"
+            android:background="@color/ColorAppClaro"
             android:text="Registrarse" />
+
+        <View
+            android:id="@+id/divider8"
+            android:layout_width="1dp"
+            android:layout_height="48dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/ColorAppClaro"
             android:text="Cancelar" />
     </LinearLayout>
 
