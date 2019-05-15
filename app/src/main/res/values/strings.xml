@@ -11,4 +11,12 @@
     <string name="buscar">Buscar</string>
     <string name="title_activity_base_">Base_Activity</string>
     <string name="nombre_de_la_empresa">Nombre de la empresa</string>
+    <string name="introduzca_el_cif">Introduzca el CIF</string>
+    <string name="introduzca_la_direccion_completa">Introduzca la direccion completa</string>
+    <string name="introduzca_una_breve_descripci_n">Introduzca una breve descripción</string>
+    <string name="todo">TODO</string>
+    <string name="guardar">Guardar</string>
+    <string name="info">Recuerde: Debe pulsar el botón aceptar para guardar los cambios</string>
+    <string name="VAL_BACK">REGRESAR</string>
+    <string name="VAL_IMAGEN">Image</string>
 </resources>

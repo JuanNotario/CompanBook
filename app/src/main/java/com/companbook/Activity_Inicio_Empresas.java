@@ -1,7 +1,9 @@
 package com.companbook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class Activity_Inicio_Empresas extends Base_Activity {
 
@@ -9,6 +11,11 @@ public class Activity_Inicio_Empresas extends Base_Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__inicio__empresas);
+    }
+
+    public void pruebaPerfil(View view) {
+        Intent i = new Intent(this,Perfil_Empresa.class);
+        startActivity(i);
     }
 
     @Override
