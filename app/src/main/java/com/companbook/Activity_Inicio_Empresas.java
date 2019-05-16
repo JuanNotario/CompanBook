@@ -18,6 +18,11 @@ public class Activity_Inicio_Empresas extends Base_Activity {
         startActivity(i);
     }
 
+    public void pruebaPerfilCatalogo(View view) {
+        Intent i = new Intent(this,Agregar_objeto_catalogo.class);
+        startActivity(i);
+    }
+
     @Override
     public int cargarLayout() {
         return R.layout.activity__inicio__empresas;

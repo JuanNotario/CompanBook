@@ -17,6 +17,9 @@ public class Datos_Empresa {
         this.dirección = dirección;
     }
 
+    public Datos_Empresa() {
+    }
+
     public String getUid() {
         return uid;
     }

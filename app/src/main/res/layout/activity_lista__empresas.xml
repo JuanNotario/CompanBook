@@ -5,12 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity_Inicio_Empresas">
+    android:paddingLeft="20dp"
+    android:paddingTop="35dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp"
+    tools:context=".Lista_Empresas">
+
+    <TextView
+        android:id="@+id/tvEmpresasDisponibles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:text="@string/empresas_disponibles"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:fontFamily="casual" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/usersTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
         android:scaleX="1"
         android:scaleY="1"
         app:tabIndicatorColor="@color/colorPrimary">
@@ -30,24 +46,7 @@
     </android.support.design.widget.TabLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvCatalogo"
+        android:id="@+id/rvEmpresas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="pruebaPerfil"
-        android:text="Boton temporal perfil" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="pruebaPerfilCatalogo"
-        android:text="Boton temporal agregar al catalogo" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>

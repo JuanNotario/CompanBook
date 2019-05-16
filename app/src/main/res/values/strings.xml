@@ -19,4 +19,13 @@
     <string name="info">Recuerde: Debe pulsar el botón aceptar para guardar los cambios</string>
     <string name="VAL_BACK">REGRESAR</string>
     <string name="VAL_IMAGEN">Image</string>
+    <string name="breve_descripcion">Breve descripcion</string>
+    <string name="palabra_clave">Palabra clave</string>
+    <string name="tama_o">Tamaño</string>
+    <string name="precio">Precio</string>
+    <string name="opcional">Opcional:</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="precio_del_producto">Precio del producto</string>
+    <string name="referencia_del_producto">Referencia del producto</string>
+    <string name="empresas_disponibles">Empresas disponibles</string>
 </resources>

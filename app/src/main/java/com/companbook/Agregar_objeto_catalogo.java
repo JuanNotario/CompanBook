@@ -2,7 +2,6 @@ package com.companbook;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,32 +9,29 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.companbook.Pojos.Catalogo;
 import com.companbook.Pojos.Datos_Empresa;
+import com.companbook.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,28 +41,34 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-public class Perfil_Empresa extends Base_Activity {
+public class Agregar_objeto_catalogo extends Base_Activity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 150;
     public static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 123;
 
-    ImageView logo;
-    EditText nombre;
-    EditText CIF;
-    EditText direccion;
-    EditText descripción;
-    TextView tvEmail;
+    ImageView imagen;
+    EditText txtNombre;
+    EditText txtReferencia;
+    EditText txtDesc;
+    EditText txtPrecio;
+    EditText txtPalabraClave;
+    EditText txtPotencia;
+    EditText txtTamaño;
 
-    String email;
+    ArrayList<Catalogo> datos_catalogo;
+    info_CompProfile infoCat;
+
     String uid;
-    String txtNombre;
-    String txtCIF;
-    String txtDireccion;
-    String txtDescripcion;
-    String URL;
+    String nombre;
+    String referencia;
+    String desc;
+    int precio;
+    String precio2;
+    String url_foto;
+    String palabraClave;
+    String potencia;
+    String tamaño;
     int codigo = 0;
-    ArrayList<Datos_Empresa> datos_empresas;
-    info_CompProfile infoComp;
 
     FirebaseUser user;
     Uri uri;
@@ -77,17 +79,15 @@ public class Perfil_Empresa extends Base_Activity {
 
     Bitmap imageBitmap;
 
-    private Dialog miniProgressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil__empresa);
+        setContentView(R.layout.activity_agregar_objeto_catalogo);
 
         user  = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            email = user.getEmail();
+
             uid = user.getUid();
 
         } else {
@@ -96,18 +96,20 @@ public class Perfil_Empresa extends Base_Activity {
 
         storage = FirebaseStorage.getInstance().getReference();
 
+        imagen = findViewById(R.id.ivFotoProd);
+        txtNombre = findViewById(R.id.etNomProd);
+        txtReferencia = findViewById(R.id.etReferencia);
+        txtDesc = findViewById(R.id.etDescripcion);
+        txtPrecio = findViewById(R.id.etPrecio);
+        txtPalabraClave = findViewById(R.id.etPalabraClave);
+        txtPotencia = findViewById(R.id.etPotencia);
+        txtTamaño = findViewById(R.id.etTamaño);
 
-        logo = findViewById(R.id.ivLogo);
-        nombre = findViewById(R.id.etNombre);
-        CIF = findViewById(R.id.etCIF);
-        direccion = findViewById(R.id.etDireccion);
-        descripción = findViewById(R.id.etDescripcion);
-
-        logo.setOnClickListener(new View.OnClickListener() {
+        imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CharSequence[] options = {"Hacer foto", "Galería", "Cancelar"};
-                final AlertDialog.Builder builder = new AlertDialog.Builder(Perfil_Empresa.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Agregar_objeto_catalogo.this);
                 builder.setTitle("Elige una opción");
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
@@ -125,86 +127,26 @@ public class Perfil_Empresa extends Base_Activity {
             }
         });
 
-        dbr = FirebaseDatabase.getInstance().getReference().child("Empresa");
-
-        if (cel == null) {
-            cel = new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    datos_empresas = new ArrayList<Datos_Empresa>();
-
-                    Datos_Empresa datos_empresa = dataSnapshot.getValue(Datos_Empresa.class);
-                    datos_empresas.add(datos_empresa);
-
-                    FirebaseUser userFirebase = FirebaseAuth.getInstance().getCurrentUser();
-
-                    if (userFirebase != null) {
-                        for (Datos_Empresa aux : datos_empresas) {
-                            Log.e("usuari", aux.getUid());
-
-                            if (aux.getUid().equals(userFirebase.getUid())) {
-                                Glide.with(Perfil_Empresa.this).load(aux.getUrl_logo()).into(logo);
-                                nombre.setText(aux.getNombre());
-                                CIF.setText(aux.getCif());
-                                direccion.setText(aux.getDirección());
-                                descripción.setText(aux.getDescripcion());
-
-                                URL = aux.getUrl_logo();
-                                dbr.removeEventListener(cel);
-                            }
-                        }
-                    }
-
-                }
-
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-
-            };
-            dbr.addChildEventListener(cel);
-        }
-    }
-
-    @Override
-    public int cargarLayout() {
-        return R.layout.activity_perfil__empresa;
-    }
-
-    @Override
-    public boolean setDrawer() {
-        return true;
+        dbr = FirebaseDatabase.getInstance().getReference().child("Catalogo");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void aceptar(View view) {
-
+    public void Guardar(View view) {
         //mostrarMiniProgressBar();
-        txtNombre = nombre.getText().toString();
-        txtCIF = CIF.getText().toString();
-        txtDireccion = direccion.getText().toString();
-        txtDescripcion = descripción.getText().toString();
+        nombre = txtNombre.getText().toString();
+        referencia = txtReferencia.getText().toString();
+        precio2 = txtPrecio.getText().toString();
+        desc = txtDesc.getText().toString();
+        palabraClave = txtPalabraClave.getText().toString();
+        potencia = txtPotencia.getText().toString();
+        tamaño = txtTamaño.getText().toString();
 
-        if (txtNombre.trim().isEmpty() || txtCIF.trim().isEmpty() || txtDireccion.trim().isEmpty() || txtDescripcion.trim().isEmpty()) {
+        if (nombre.trim().isEmpty() || referencia.trim().isEmpty() || precio2.trim().isEmpty() || desc.trim().isEmpty() || palabraClave.trim().isEmpty()) {
             Toast.makeText(this, "Todos los campos deben estar rellenos", Toast.LENGTH_SHORT).show();
 
         } else {
+            precio = Integer.parseInt(precio2);
+
             if (codigo == 1) {
                 subirLogo(getImageUri(this, imageBitmap));
 
@@ -213,11 +155,11 @@ public class Perfil_Empresa extends Base_Activity {
 
             } else if (codigo == 0) {
 
-                Datos_Empresa usuario = new Datos_Empresa(uid, URL, txtNombre, txtDescripcion, txtCIF, txtDireccion);
+                Catalogo datCatalogo = new Catalogo(uid, nombre, referencia, desc, precio, url_foto, palabraClave, potencia, tamaño);
 
-                dbr.child(uid).setValue(usuario);
+                dbr.child(uid).setValue(datCatalogo);
                 Toast.makeText(getApplicationContext(), "Los datos se han guardado correctamente", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Perfil_Empresa.this, Activity_Inicio_Empresas.class);
+                Intent i = new Intent(Agregar_objeto_catalogo.this, Activity_Inicio_Empresas.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
 
@@ -225,28 +167,6 @@ public class Perfil_Empresa extends Base_Activity {
                     miniProgressBar.cancel();
                 }*/
             }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            imageBitmap = (Bitmap) extras.get("data");
-            logo.setImageBitmap(imageBitmap);
-            codigo = 1;
-
-            infoComp = new info_CompProfile(Perfil_Empresa.this);
-            infoComp.show();
-
-
-        } else if (requestCode == 10 && resultCode == RESULT_OK) {
-            uri = data.getData();
-            Glide.with(Perfil_Empresa.this).load(uri).into(logo);
-            codigo = 2;
-
-            infoComp = new info_CompProfile(Perfil_Empresa.this);
-            infoComp.show();
         }
     }
 
@@ -263,6 +183,79 @@ public class Perfil_Empresa extends Base_Activity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
         startActivityForResult(intent.createChooser(intent, "Seleccione la Aplicacion"), 10);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            imagen.setImageBitmap(imageBitmap);
+            codigo = 1;
+
+            infoCat = new info_CompProfile(Agregar_objeto_catalogo.this);
+            infoCat.show();
+
+
+        } else if (requestCode == 10 && resultCode == RESULT_OK) {
+            uri = data.getData();
+            Glide.with(Agregar_objeto_catalogo.this).load(uri).into(imagen);
+            codigo = 2;
+
+            infoCat = new info_CompProfile(Agregar_objeto_catalogo.this);
+            infoCat.show();
+        }
+    }
+
+    public void subirLogo(Uri uri) {
+        destino = storage.child("logoEmpresa").child(String.valueOf(uri.getLastPathSegment()));
+
+
+        UploadTask uploadTask = destino.putFile(uri);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+
+                return destino.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    url_foto = downloadUri.toString();  //URL DE DESCARGA
+
+                    nombre = txtNombre.getText().toString();
+                    referencia = txtReferencia.getText().toString();
+                    precio = Integer.parseInt(txtPrecio.getText().toString());
+                    desc = txtDesc.getText().toString();
+                    palabraClave = txtPalabraClave.getText().toString();
+                    potencia = txtPotencia.getText().toString();
+                    tamaño = txtTamaño.getText().toString();
+
+                    Catalogo datCat = new Catalogo(uid, nombre, referencia, desc, precio, url_foto, palabraClave, potencia, tamaño);
+
+                    dbr.child(uid).setValue(datCat);
+                    Toast.makeText(getApplicationContext(), "Los datos se han guardado correctamente", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(Agregar_objeto_catalogo.this, Activity_Inicio_Empresas.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+
+                    /*if (miniProgressBar.isShowing()) {
+                        miniProgressBar.cancel();
+                    }*/
+
+
+                } else {
+                    //Posibles errores
+                }
+            }
+        });
     }
 
     public boolean checkPermissionWRITE_EXTERNAL_STORAGE(
@@ -293,54 +286,6 @@ public class Perfil_Empresa extends Base_Activity {
             return true;
         }
 
-    }
-
-    public void subirLogo(Uri uri) {
-        destino = storage.child("logoEmpresa").child(String.valueOf(uri.getLastPathSegment()));
-
-
-        UploadTask uploadTask = destino.putFile(uri);
-
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-
-
-                return destino.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    URL = downloadUri.toString();  //URL DE DESCARGA
-
-                    txtNombre = nombre.getText().toString();
-                    txtCIF = CIF.getText().toString();
-                    txtDireccion = direccion.getText().toString();
-                    txtDescripcion = descripción.getText().toString();
-
-                    Datos_Empresa datComp = new Datos_Empresa(uid, URL, txtNombre, txtDescripcion, txtCIF, txtDireccion);
-
-                    dbr.child(uid).setValue(datComp);
-                    Toast.makeText(getApplicationContext(), "Los datos se han guardado correctamente", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Perfil_Empresa.this, Activity_Inicio_Empresas.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-
-                    /*if (miniProgressBar.isShowing()) {
-                        miniProgressBar.cancel();
-                    }*/
-
-
-                } else {
-                    //Posibles errores
-                }
-            }
-        });
     }
 
     private Uri getImageUri(Context context, Bitmap inImage) {
@@ -386,12 +331,13 @@ public class Perfil_Empresa extends Base_Activity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void mostrarMiniProgressBar() {
-        miniProgressBar = new Dialog(this);
-        miniProgressBar.setContentView(R.layout.progbar_mini);
-        miniProgressBar.setCancelable(false);
-        miniProgressBar.show();
-        //Branch Change
+    @Override
+    public int cargarLayout() {
+        return R.layout.activity_agregar_objeto_catalogo;
+    }
+
+    @Override
+    public boolean setDrawer() {
+        return true;
     }
 }
