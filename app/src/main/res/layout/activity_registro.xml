@@ -7,6 +7,7 @@
     android:layout_centerInParent="true"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
+    android:background="@color/ColorClaro"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="30dp"
@@ -78,8 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ColorAppClaro"
-            android:text="Registrarse" />
+            android:background="@color/ColorOscuro"
+            android:text="Registrarse"
+            android:textColor="@color/ColorClaro2" />
 
         <View
             android:id="@+id/divider8"
@@ -92,8 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ColorAppClaro"
-            android:text="Cancelar" />
+            android:background="@color/ColorOscuro"
+            android:text="Cancelar"
+            android:textColor="@color/ColorClaro2" />
     </LinearLayout>
 
 </LinearLayout>

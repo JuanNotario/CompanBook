@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/ColorClaro"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="40dp"
@@ -38,7 +39,6 @@
                 android:id="@+id/etNomProd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@android:drawable/ic_menu_edit"
                 android:hint="@string/nombre_del_producto" />
         </android.support.design.widget.TextInputLayout>
 
@@ -55,7 +55,6 @@
                 android:id="@+id/etPrecio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@android:drawable/ic_menu_edit"
                 android:hint="@string/precio_del_producto"
                 android:inputType="number|numberDecimal" />
         </android.support.design.widget.TextInputLayout>
@@ -73,7 +72,6 @@
                 android:id="@+id/etReferencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@android:drawable/ic_menu_edit"
                 android:hint="@string/referencia_del_producto" />
         </android.support.design.widget.TextInputLayout>
 
@@ -95,7 +93,6 @@
                     android:id="@+id/etPalabraClave"
                     android:layout_width="match_parent"
                     android:layout_height="41dp"
-                    android:drawableEnd="@android:drawable/ic_menu_edit"
                     android:hint="@string/palabra_clave" />
 
             </android.support.design.widget.TextInputLayout>
@@ -121,7 +118,6 @@
                 android:id="@+id/etDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@android:drawable/ic_menu_edit"
                 android:hint="@string/breve_descripcion" />
         </android.support.design.widget.TextInputLayout>
 
@@ -154,7 +150,6 @@
                     android:id="@+id/etPotencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@android:drawable/ic_menu_edit"
                     android:hint="@string/precio"
                     android:inputType="number|numberDecimal" />
             </android.support.design.widget.TextInputLayout>

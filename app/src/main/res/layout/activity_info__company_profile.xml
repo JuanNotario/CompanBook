@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="info_CompProfile"
     android:layout_width="330dp"
     android:layout_height="wrap_content"
+    android:background="@color/ColorOscuro"
     android:orientation="vertical"
     android:paddingLeft="@dimen/PADDING_30"
     android:paddingTop="@dimen/PADDING_30"
-    android:paddingRight="@dimen/PADDING_30">
+    android:paddingRight="@dimen/PADDING_30"
+    tools:context="info_CompProfile">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,8 +21,8 @@
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_info"
-            android:contentDescription="TODO" />
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_info" />
     </RelativeLayout>
 
     <View
@@ -36,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="@string/info"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/ColorClaro2" />
 
     <Button
         android:id="@+id/btnRegresar"
