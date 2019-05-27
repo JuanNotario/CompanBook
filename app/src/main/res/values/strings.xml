@@ -28,4 +28,5 @@
     <string name="precio_del_producto">Precio del producto</string>
     <string name="referencia_del_producto">Referencia del producto</string>
     <string name="empresas_disponibles">Empresas disponibles</string>
+    <string name="recomendacion">Recomendación: Guarde esta palabra, ya que sera usada para facilitar la busqueda en el catálogo mediante los filtros</string>
 </resources>
