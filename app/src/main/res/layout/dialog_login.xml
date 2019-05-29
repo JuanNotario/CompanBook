@@ -53,7 +53,7 @@
         android:id="@+id/btnInicioSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ColorOscuro"
+        android:background="@drawable/animacion_cambio_color_boton"
         android:text="Iniciar Sesion"
-        android:textColor="@color/ColorClaro2" />
+        android:textColor="@color/ColorClaro" />
 </LinearLayout>

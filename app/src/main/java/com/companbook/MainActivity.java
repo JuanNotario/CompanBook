@@ -2,11 +2,15 @@ package com.companbook;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Button logIn;
     Button registrarse;
     Button accesoUsr;
+    TextView texto;
+    ImageView imagen;
 
     private FirebaseAuth mAuth;
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         logIn = findViewById(R.id.btnLogIn);
         registrarse = findViewById(R.id.btnRegistrarse);
         accesoUsr = findViewById(R.id.btnAccesoUsr);
+        texto=findViewById(R.id.textView2);
+        imagen=findViewById(R.id.imageView2);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -95,5 +103,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Animation myanim1= AnimationUtils.loadAnimation(this, R.anim.anim_splash);
+        Animation myanim2 = AnimationUtils.loadAnimation(this, R.anim.anim_splash_izquierda);
+        texto.startAnimation(myanim2);
+        imagen.startAnimation(myanim1);
+
     }
+
+
+
+
 }
