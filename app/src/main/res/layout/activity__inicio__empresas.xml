@@ -41,14 +41,18 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/animacion_cambio_color_boton"
         android:onClick="pruebaPerfil"
-        android:text="Boton temporal perfil" />
+        android:text="Boton temporal perfil"
+        android:textColor="@color/ColorClaro" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/animacion_cambio_color_boton"
         android:onClick="pruebaPerfilCatalogo"
-        android:text="Boton temporal agregar al catalogo" />
+        android:text="Boton temporal agregar al catalogo"
+        android:textColor="@color/ColorClaro" />
 
 </LinearLayout>

@@ -11,6 +11,6 @@
     <color name="ColorClaro2">#73E1EB</color><!--Color entre el intermedio y el mas claro-->
     <color name="ColorIntermedio">#61C2FF</color><!--Color intermedio-->
     <color name="ColorOscuro2">#81A3EB</color><!--Color entre el intermedio y el mas oscuro-->
-    <color name="ColorOscuro">#19027D</color><!--Color mas oscuro-->
+    <color name="ColorOscuro">#19027d</color><!--Color mas oscuro-->
     <color name="ColorAppPrueba">#6AE7FC</color>
 </resources>

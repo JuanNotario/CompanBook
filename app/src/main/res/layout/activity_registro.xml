@@ -79,9 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ColorOscuro"
+            android:background="@drawable/animacion_cambio_color_boton"
             android:text="Registrarse"
-            android:textColor="@color/ColorClaro2" />
+            android:textColor="@color/ColorClaro" />
 
         <View
             android:id="@+id/divider8"
@@ -94,9 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ColorOscuro"
+            android:background="@drawable/animacion_cambio_color_boton"
             android:text="Cancelar"
-            android:textColor="@color/ColorClaro2" />
+            android:textColor="@color/ColorClaro" />
     </LinearLayout>
 
 </LinearLayout>

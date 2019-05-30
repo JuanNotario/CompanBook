@@ -120,10 +120,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/ColorAppClaro"
+            android:background="@drawable/animacion_cambio_color_boton"
             android:foregroundGravity="bottom"
             android:onClick="aceptar"
-            android:text="@string/guardar" />
+            android:text="@string/guardar"
+            android:textColor="@color/ColorClaro" />
 
     </LinearLayout>
 

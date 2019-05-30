@@ -177,9 +177,10 @@
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/ColorAppClaro"
+            android:background="@drawable/animacion_cambio_color_boton"
             android:onClick="Guardar"
-            android:text="@string/guardar" />
+            android:text="@string/guardar"
+            android:textColor="@color/ColorClaro" />
 
     </LinearLayout>
 
