@@ -1,5 +1,7 @@
 package com.companbook;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class Activity_registro extends Base_Activity {
+public class Activity_registro extends AppCompatActivity {
 
     Button registro;
     Button cancelar;
@@ -78,15 +80,16 @@ public class Activity_registro extends Base_Activity {
                 }
             }
         });
-    }
 
-    @Override
-    public int cargarLayout() {
-        return R.layout.activity_registro;
-    }
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Activity_registro.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
 
-    @Override
-    public boolean setDrawer() {
-        return true;
+
+            }
+        });
     }
 }

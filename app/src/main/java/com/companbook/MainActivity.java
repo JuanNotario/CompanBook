@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Dialog dlog;
                 Button btnLogin;
+                Button btnCancelar;
                 final TextView tvEmail;
                 final TextView tvPass;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 dlog = dl.login(MainActivity.this, mAuth);
 
                 btnLogin = dlog.findViewById(R.id.btnInicioSesion);
+                btnCancelar = dlog.findViewById(R.id.btnCancel);
                 tvEmail = dlog.findViewById(R.id.etEmail);
                 tvPass = dlog.findViewById(R.id.etContrasenia);
 
@@ -91,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
+                    }
+                });
+
+                btnCancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dlog.dismiss();
                     }
                 });
             }

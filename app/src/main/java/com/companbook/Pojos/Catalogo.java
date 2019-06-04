@@ -1,17 +1,20 @@
 package com.companbook.Pojos;
 
-public class Catalogo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Catalogo implements Parcelable {
     String uid;
     String nombre;
     String referencia;
     String desc;
-    int precio;
+    Double precio;
     String url_foto;
     String palabraClave;
     String potencia;
     String tamaño;
 
-    public Catalogo(String uid, String nombre, String referencia, String desc, int precio, String url_foto, String palabraClave, String potencia, String tamaño) {
+    public Catalogo(String uid, String nombre, String referencia, String desc, Double precio, String url_foto, String palabraClave, String potencia, String tamaño) {
         this.uid = uid;
         this.nombre = nombre;
         this.referencia = referencia;
@@ -25,6 +28,30 @@ public class Catalogo {
 
     public Catalogo() {
     }
+
+    protected Catalogo(Parcel in) {
+        uid = in.readString();
+        nombre = in.readString();
+        referencia = in.readString();
+        desc = in.readString();
+        precio = in.readDouble();
+        url_foto = in.readString();
+        palabraClave = in.readString();
+        potencia = in.readString();
+        tamaño = in.readString();
+    }
+
+    public static final Creator<Catalogo> CREATOR = new Creator<Catalogo>() {
+        @Override
+        public Catalogo createFromParcel(Parcel in) {
+            return new Catalogo(in);
+        }
+
+        @Override
+        public Catalogo[] newArray(int size) {
+            return new Catalogo[size];
+        }
+    };
 
     public String getUid() {
         return uid;
@@ -42,7 +69,7 @@ public class Catalogo {
         return desc;
     }
 
-    public int getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
@@ -60,5 +87,23 @@ public class Catalogo {
 
     public String getTamaño() {
         return tamaño;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uid);
+        dest.writeString(nombre);
+        dest.writeString(referencia);
+        dest.writeString(desc);
+        dest.writeDouble(precio);
+        dest.writeString(url_foto);
+        dest.writeString(palabraClave);
+        dest.writeString(potencia);
+        dest.writeString(tamaño);
     }
 }

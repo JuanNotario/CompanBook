@@ -24,6 +24,7 @@
             android:id="@+id/tvNombreEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:text="Nombre"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -33,6 +34,7 @@
             android:id="@+id/tvDescripcionEmp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:text="Descripción"
             app:fontFamily="casual" />
     </LinearLayout>

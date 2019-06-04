@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ColorClaro"
     android:orientation="vertical"
     tools:context=".Perfil_Empresa">
 
@@ -25,12 +24,14 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivLogo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/todo"
-                app:srcCompat="@android:drawable/ic_menu_report_image" />
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_user"
+                app:civ_border_color="#FF000000" />
+
         </LinearLayout>
 
         <View
@@ -54,16 +55,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="@android:color/black"
-        android:orientation="vertical"></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="40dp"
-        android:paddingTop="30dp"
         android:paddingRight="40dp"
         android:paddingBottom="20dp">
 
@@ -120,11 +114,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@drawable/animacion_cambio_color_boton"
+            android:background="@color/Botones"
             android:foregroundGravity="bottom"
             android:onClick="aceptar"
             android:text="@string/guardar"
-            android:textColor="@color/ColorClaro" />
+            android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
 

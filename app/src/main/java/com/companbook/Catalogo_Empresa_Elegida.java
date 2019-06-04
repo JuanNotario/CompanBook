@@ -11,12 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.companbook.Adapters.AdaptadorInicioEmpresas;
 import com.companbook.Adapters.AdaptadorListaCatalogo;
+import com.companbook.Adapters.AdaptadorListaEmpresas;
 import com.companbook.Pojos.Catalogo;
 import com.companbook.Pojos.Datos_Empresa;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,46 +23,44 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class Activity_Inicio_Empresas extends Base_Activity {
+public class Catalogo_Empresa_Elegida extends Base_Activity {
 
-    AdaptadorInicioEmpresas adapter;
+    AdaptadorListaCatalogo adapter;
     ArrayList<Catalogo> datos;
     private ChildEventListener cel;
     private DatabaseReference dbr;
-    RecyclerView rVIniCat;
+    RecyclerView rVCat;
     LinearLayoutManager llm;
     Catalogo m;
+    Datos_Empresa c;
 
-    FirebaseUser user;
-
+    TextView nomE;
     String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity__inicio__empresas);
+        //setContentView(R.layout.activity_catalogo__empresa__elegida);
+
+        c = getIntent().getParcelableExtra("CLAVECITA");
 
         datos = new ArrayList<Catalogo>();
-        adapter = new AdaptadorInicioEmpresas(datos, this);
+        adapter = new AdaptadorListaCatalogo(datos, this);
 
-        rVIniCat = findViewById(R.id.rvCatalogo);
+        rVCat = findViewById(R.id.rvCatEmprElg);
+        nomE = findViewById(R.id.tvEmpresaMensajeCatalogo);
 
-        user  = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-
-            uid = user.getUid();
-
-        }
+        nomE.setText(c.getNombre());
+        uid = c.getUid();
 
         llm = new LinearLayoutManager(this);
 
-        rVIniCat.setLayoutManager(llm);
-        rVIniCat.setAdapter(adapter);
-        rVIniCat.setItemAnimator(new DefaultItemAnimator());
+        rVCat.setLayoutManager(llm);
+        rVCat.setAdapter(adapter);
+        rVCat.setItemAnimator(new DefaultItemAnimator());
         dbr = FirebaseDatabase.getInstance().getReference().child("Catalogo");
 
-        /*adapter.setOnClickListener(new View.OnClickListener() {
+       /*adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Datos_Empresa u = datos.get(rVEmpresitas.getChildAdapterPosition(v));
@@ -82,7 +78,7 @@ public class Activity_Inicio_Empresas extends Base_Activity {
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     m = (Catalogo) dataSnapshot.getValue(Catalogo.class);
 
-                    if (m.getUid().equals(uid)) {
+                    if (m.getUid().equals(c.getUid())) {
                         datos.add(m);
                     }
 
@@ -120,7 +116,7 @@ public class Activity_Inicio_Empresas extends Base_Activity {
 
     @Override
     public int cargarLayout() {
-        return R.layout.activity__inicio__empresas;
+        return R.layout.activity_catalogo__empresa__elegida;
     }
 
     @Override

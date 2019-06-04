@@ -5,12 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity_Inicio_Empresas">
+    android:paddingLeft="20dp"
+    android:paddingTop="35dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp"
+    tools:context=".Catalogo_Empresa_Elegida">
+
+    <TextView
+        android:id="@+id/tvMensajeCatalogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="Catálogo disponible de:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:fontFamily="casual" />
+
+    <TextView
+        android:id="@+id/tvEmpresaMensajeCatalogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:text="NomEmpresa"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:fontFamily="casual" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/usersTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:scaleX="1"
         android:scaleY="1"
         app:tabIndicatorColor="@color/colorPrimary">
@@ -30,10 +57,7 @@
     </android.support.design.widget.TabLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvCatalogo"
+        android:id="@+id/rvCatEmprElg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.RecyclerView>
-
+        android:layout_height="match_parent" />
 </LinearLayout>

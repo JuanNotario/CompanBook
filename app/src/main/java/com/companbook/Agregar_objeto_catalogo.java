@@ -54,6 +54,9 @@ public class Agregar_objeto_catalogo extends Base_Activity {
     EditText txtPalabraClave;
     EditText txtPotencia;
     EditText txtTamaño;
+    ImageView infoClave;
+
+    Recomendacion_clave redClave;
 
     ArrayList<Catalogo> datos_catalogo;
     info_CompProfile infoCat;
@@ -62,7 +65,7 @@ public class Agregar_objeto_catalogo extends Base_Activity {
     String nombre;
     String referencia;
     String desc;
-    int precio;
+    Double precio;
     String precio2;
     String url_foto;
     String palabraClave;
@@ -82,7 +85,7 @@ public class Agregar_objeto_catalogo extends Base_Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_objeto_catalogo);
+        //setContentView(R.layout.activity_agregar_objeto_catalogo);
 
         user  = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -104,6 +107,15 @@ public class Agregar_objeto_catalogo extends Base_Activity {
         txtPalabraClave = findViewById(R.id.etPalabraClave);
         txtPotencia = findViewById(R.id.etPotencia);
         txtTamaño = findViewById(R.id.etTamaño);
+        infoClave = findViewById(R.id.ivInfoClave);
+
+        infoClave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redClave = new Recomendacion_clave(Agregar_objeto_catalogo.this);
+                redClave.show();
+            }
+        });
 
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +157,7 @@ public class Agregar_objeto_catalogo extends Base_Activity {
             Toast.makeText(this, "Todos los campos deben estar rellenos", Toast.LENGTH_SHORT).show();
 
         } else {
-            precio = Integer.parseInt(precio2);
+            precio = Double.parseDouble(precio2);
 
             if (codigo == 1) {
                 subirLogo(getImageUri(this, imageBitmap));
@@ -232,7 +244,7 @@ public class Agregar_objeto_catalogo extends Base_Activity {
 
                     nombre = txtNombre.getText().toString();
                     referencia = txtReferencia.getText().toString();
-                    precio = Integer.parseInt(txtPrecio.getText().toString());
+                    precio = Double.parseDouble(txtPrecio.getText().toString());
                     desc = txtDesc.getText().toString();
                     palabraClave = txtPalabraClave.getText().toString();
                     potencia = txtPotencia.getText().toString();

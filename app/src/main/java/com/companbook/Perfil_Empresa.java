@@ -82,7 +82,7 @@ public class Perfil_Empresa extends Base_Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil__empresa);
+        //setContentView(R.layout.activity_perfil__empresa);
 
         user  = FirebaseAuth.getInstance().getCurrentUser();
 

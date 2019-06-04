@@ -1,78 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/imagen_fondo"
+    android:background="@android:color/background_light"
     android:gravity="center"
+    android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="221dp"
-        android:layout_height="179dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="false"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginRight="102dp"
-        android:foregroundGravity="center"
-        app:srcCompat="@drawable/ic_library"
-        tools:srcCompat="@drawable/ic_library" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="298dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="40sp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="285dp"
-        android:text="CompanBook"
-        android:textColor="@color/ColorOscuro"
-        android:textSize="50dp"
-        app:fontFamily="sans-serif-condensed-medium" />
-
-    <Button
-        android:id="@+id/btnLogIn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="154dp"
-        android:background="@drawable/animacion_cambio_color_boton"
-        android:text="Log In"
-        android:textColor="@color/ColorClaro" />
+        android:layout_height="370dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnRegistrarse"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="210dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="62dp"
+            android:foregroundGravity="center"
+            app:srcCompat="@drawable/ic_library" />
+
+        <View
+            android:id="@+id/divider31"
+            android:layout_width="match_parent"
+            android:layout_height="14dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="CompanBook"
+            android:textColor="@color/ColorOscuro"
+            android:textSize="45sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="86dp"
-        android:background="@drawable/animacion_cambio_color_boton"
-        android:text="Registrarse"
-        android:textColor="@color/ColorClaro" />
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnAccesoUsr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/animacion_cambio_color_boton"
-        android:text="Acceso Usuarios"
-        android:textColor="@color/ColorClaro" />
+        <Button
+            android:id="@+id/btnLogIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/Botones"
+            android:text="Log In"
+            android:textColor="@android:color/background_dark" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/Botones"
+            android:text="Registrarse"
+            android:textColor="@android:color/background_dark" />
+
+        <Button
+            android:id="@+id/btnAccesoUsr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/Botones"
+            android:text="Acceso Usuarios"
+            android:textColor="@android:color/background_dark" />
+    </LinearLayout>
+
+</LinearLayout>

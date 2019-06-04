@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/ColorClaro"
+    android:background="@android:color/background_light"
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".LoginActivity">
@@ -42,18 +42,40 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="textPersonName" />
+        android:inputType="textPassword" />
 
     <View
         android:id="@+id/divider7"
         android:layout_width="match_parent"
         android:layout_height="25dp" />
 
-    <Button
-        android:id="@+id/btnInicioSesion"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/animacion_cambio_color_boton"
-        android:text="Iniciar Sesion"
-        android:textColor="@color/ColorClaro" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnInicioSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Botones"
+            android:text="Iniciar Sesion"
+            android:textColor="@android:color/background_dark" />
+
+        <View
+            android:id="@+id/divider26"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Botones"
+            android:text="Cancelar"
+            android:textColor="@android:color/background_dark" />
+
+    </LinearLayout>
+
 </LinearLayout>

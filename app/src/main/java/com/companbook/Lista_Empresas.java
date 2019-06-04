@@ -33,7 +33,7 @@ public class Lista_Empresas extends Base_Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista__empresas);
+        //setContentView(R.layout.activity_lista__empresas);
 
         datos = new ArrayList<Datos_Empresa>();
         adapter = new AdaptadorListaEmpresas(datos, this);
@@ -46,15 +46,15 @@ public class Lista_Empresas extends Base_Activity {
         rVEmpresitas.setItemAnimator(new DefaultItemAnimator());
         dbr = FirebaseDatabase.getInstance().getReference().child("Empresa");
 
-        /*adapter.setOnClickListener(new View.OnClickListener() {
+        adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Datos_Empresa u = datos.get(rVEmpresitas.getChildAdapterPosition(v));
-                Intent intent = new Intent(Lista_Empresas.this, Consulta_Usuarios_Final.class);
+                Intent intent = new Intent(Lista_Empresas.this, Informacion_Empresa.class);
                 intent.putExtra("CLAVE", u);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
     private void addChildEventListener() {
@@ -62,7 +62,6 @@ public class Lista_Empresas extends Base_Activity {
             cel= new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    System.out.println("Nuevo mensaje");
                     m = (Datos_Empresa) dataSnapshot.getValue(Datos_Empresa.class);
                     datos.add(m);
                     adapter.notifyItemInserted(datos.size()-1);
