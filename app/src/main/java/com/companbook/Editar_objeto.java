@@ -25,11 +25,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.companbook.Pojos.Catalogo;
 import com.companbook.Pojos.Datos_Empresa;
-import com.companbook.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
@@ -39,38 +37,35 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
-public class Agregar_objeto_catalogo extends Base_Activity {
+public class Editar_objeto extends Base_Activity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 150;
     public static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 123;
 
-    ImageView imagen;
-    EditText txtNombre;
-    EditText txtReferencia;
-    EditText txtDesc;
-    EditText txtPrecio;
-    EditText txtPalabraClave;
-    EditText txtPotencia;
-    EditText txtTamaño;
-    ImageView infoClave;
 
-    Recomendacion_clave redClave;
+    Catalogo c;
 
-    ArrayList<Catalogo> datos_catalogo;
-    info_CompProfile infoCat;
+    ImageView foto;
+    EditText nom;
+    EditText ref;
+    EditText prec;
+    EditText palClave;
+    EditText desc;
+    EditText tam;
+    EditText pot;
 
-    String uid;
-    String nombre;
-    String referencia;
-    String desc;
-    Double precio;
-    String precio2;
     String url_foto;
-    String palabraClave;
-    String potencia;
-    String tamaño;
+    String nomE;
+    String refE;
+    Double precE;
+    String claveE;
+    String descE;
+    String tamE;
+    String potE;
+    String precio;
+    String uid;
+    int valorDado;
     int codigo = 0;
 
     FirebaseUser user;
@@ -79,49 +74,49 @@ public class Agregar_objeto_catalogo extends Base_Activity {
     StorageReference storage;
     DatabaseReference dbr;
     ChildEventListener cel;
+    info_CompProfile infoComp;
 
     Bitmap imageBitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_agregar_objeto_catalogo);
-
-        user  = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-
-            uid = user.getUid();
-
-        } else {
-            //Aqui ira algo
-        }
+        //setContentView(R.layout.activity_editar_objeto);
 
         storage = FirebaseStorage.getInstance().getReference();
 
-        imagen = findViewById(R.id.ivFotoProd);
-        txtNombre = findViewById(R.id.etNomProd);
-        txtReferencia = findViewById(R.id.etReferencia);
-        txtDesc = findViewById(R.id.etDescripcion);
-        txtPrecio = findViewById(R.id.etPrecio);
-        txtPalabraClave = findViewById(R.id.etPalabraClave);
-        txtPotencia = findViewById(R.id.etPotencia);
-        txtTamaño = findViewById(R.id.etTamaño);
-        infoClave = findViewById(R.id.ivInfoClave);
+        c = getIntent().getParcelableExtra("CLAVE_EDIT");
 
-        infoClave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redClave = new Recomendacion_clave(Agregar_objeto_catalogo.this);
-                redClave.show();
-            }
-        });
+        foto = findViewById(R.id.imgFotoEdit);
+        nom = findViewById(R.id.etNomEdit);
+        ref = findViewById(R.id.etRefEdit);
+        prec = findViewById(R.id.etPrecEdit);
+        palClave = findViewById(R.id.etClaveEdit);
+        desc = findViewById(R.id.etDescEdit);
+        tam = findViewById(R.id.etTamEdit);
+        pot = findViewById(R.id.etPotEdit);
 
-        imagen.setOnClickListener(new View.OnClickListener() {
+        Glide.with(Editar_objeto.this).load(c.getUrl_foto()).into(foto);
+        url_foto = c.getUrl_foto();
+        nom.setText(c.getNombre());
+        ref.setText(c.getReferencia());
+        prec.setText(c.getPrecio() + "");
+        palClave.setText(c.getPalabraClave());
+        desc.setText(c.getDesc());
+        tam.setText(c.getTamaño());
+        pot.setText(c.getPotencia());
+        valorDado = c.getRandom();
+        uid = c.getUid();
+
+        System.out.println("AAAAAAAA");
+        System.out.println(valorDado);
+
+        foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CharSequence[] options = {"Hacer foto", "Galería", "Cancelar"};
-                final AlertDialog.Builder builder = new AlertDialog.Builder(Agregar_objeto_catalogo.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Editar_objeto.this);
                 builder.setTitle("Elige una opción");
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
@@ -140,24 +135,27 @@ public class Agregar_objeto_catalogo extends Base_Activity {
         });
 
         dbr = FirebaseDatabase.getInstance().getReference().child("Catalogo");
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void Guardar(View view) {
-        //mostrarMiniProgressBar();
-        nombre = txtNombre.getText().toString();
-        referencia = txtReferencia.getText().toString();
-        precio2 = txtPrecio.getText().toString();
-        desc = txtDesc.getText().toString();
-        palabraClave = txtPalabraClave.getText().toString();
-        potencia = txtPotencia.getText().toString();
-        tamaño = txtTamaño.getText().toString();
+    public void aceptar(View view) {
 
-        if (nombre.trim().isEmpty() || referencia.trim().isEmpty() || precio2.trim().isEmpty() || desc.trim().isEmpty() || palabraClave.trim().isEmpty()) {
+        //mostrarMiniProgressBar();
+
+        nomE  = nom.getText().toString();
+        refE  = ref.getText().toString();
+        precio = prec.getText().toString();
+        claveE = palClave.getText().toString();
+        descE = desc.getText().toString();
+        tamE = tam.getText().toString();
+        potE = pot.getText().toString();
+
+        if (nomE.trim().isEmpty() || refE.trim().isEmpty() || claveE.trim().isEmpty() || descE.trim().isEmpty() || precio.trim().isEmpty()) {
             Toast.makeText(this, "Todos los campos deben estar rellenos", Toast.LENGTH_SHORT).show();
 
         } else {
-            precio = Double.parseDouble(precio2);
+            precE = Double.parseDouble(precio);
 
             if (codigo == 1) {
                 subirLogo(getImageUri(this, imageBitmap));
@@ -167,13 +165,14 @@ public class Agregar_objeto_catalogo extends Base_Activity {
 
             } else if (codigo == 0) {
 
-                int valorDado = (int) Math.floor(Math.random()*99999999 + 1);
+                Catalogo datCat = new Catalogo(valorDado, uid, nomE, refE, descE, precE, url_foto, claveE, potE, tamE);
 
-                Catalogo datCatalogo = new Catalogo(valorDado, uid, nombre, referencia, desc, precio, url_foto, palabraClave, potencia, tamaño);
+                System.out.println("AAAAAAAA");
+                System.out.println(valorDado);
 
-                dbr.child(valorDado + "").setValue(datCatalogo);
+                dbr.child(valorDado + "").setValue(datCat);
                 Toast.makeText(getApplicationContext(), "Los datos se han guardado correctamente", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Agregar_objeto_catalogo.this, Activity_Inicio_Empresas.class);
+                Intent i = new Intent(Editar_objeto.this, Activity_Inicio_Empresas.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
 
@@ -181,43 +180,6 @@ public class Agregar_objeto_catalogo extends Base_Activity {
                     miniProgressBar.cancel();
                 }*/
             }
-        }
-    }
-
-    public void hacerFoto() {
-        if (checkPermissionWRITE_EXTERNAL_STORAGE(this)) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
-
-    public void cargarImagen() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");
-        startActivityForResult(intent.createChooser(intent, "Seleccione la Aplicacion"), 10);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            imageBitmap = (Bitmap) extras.get("data");
-            imagen.setImageBitmap(imageBitmap);
-            codigo = 1;
-
-            infoCat = new info_CompProfile(Agregar_objeto_catalogo.this);
-            infoCat.show();
-
-
-        } else if (requestCode == 10 && resultCode == RESULT_OK) {
-            uri = data.getData();
-            Glide.with(Agregar_objeto_catalogo.this).load(uri).into(imagen);
-            codigo = 2;
-
-            infoCat = new info_CompProfile(Agregar_objeto_catalogo.this);
-            infoCat.show();
         }
     }
 
@@ -244,21 +206,19 @@ public class Agregar_objeto_catalogo extends Base_Activity {
                     Uri downloadUri = task.getResult();
                     url_foto = downloadUri.toString();  //URL DE DESCARGA
 
-                    nombre = txtNombre.getText().toString();
-                    referencia = txtReferencia.getText().toString();
-                    precio = Double.parseDouble(txtPrecio.getText().toString());
-                    desc = txtDesc.getText().toString();
-                    palabraClave = txtPalabraClave.getText().toString();
-                    potencia = txtPotencia.getText().toString();
-                    tamaño = txtTamaño.getText().toString();
+                    nomE  = nom.getText().toString();
+                    refE  = ref.getText().toString();
+                    precio = prec.getText().toString();
+                    claveE = palClave.getText().toString();
+                    descE = desc.getText().toString();
+                    tamE = tam.getText().toString();
+                    potE = pot.getText().toString();
 
-                    int valorDado = (int) Math.floor(Math.random()*99999999 + 1);
+                    Catalogo datCat2 = new Catalogo(valorDado, uid, nomE, refE, descE, precE, url_foto, claveE, potE, tamE);
 
-                    Catalogo datCat = new Catalogo(valorDado, uid, nombre, referencia, desc, precio, url_foto, palabraClave, potencia, tamaño);
-
-                    dbr.child(valorDado + "").setValue(datCat);
+                    dbr.child(valorDado + "").setValue(datCat2);
                     Toast.makeText(getApplicationContext(), "Los datos se han guardado correctamente", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Agregar_objeto_catalogo.this, Activity_Inicio_Empresas.class);
+                    Intent i = new Intent(Editar_objeto.this, Activity_Inicio_Empresas.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
 
@@ -272,6 +232,21 @@ public class Agregar_objeto_catalogo extends Base_Activity {
                 }
             }
         });
+    }
+
+    public void hacerFoto() {
+        if (checkPermissionWRITE_EXTERNAL_STORAGE(this)) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+
+    public void cargarImagen() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(intent.createChooser(intent, "Seleccione la Aplicacion"), 10);
     }
 
     public boolean checkPermissionWRITE_EXTERNAL_STORAGE(
@@ -302,6 +277,28 @@ public class Agregar_objeto_catalogo extends Base_Activity {
             return true;
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            foto.setImageBitmap(imageBitmap);
+            codigo = 1;
+
+            infoComp = new info_CompProfile(Editar_objeto.this);
+            infoComp.show();
+
+
+        } else if (requestCode == 10 && resultCode == RESULT_OK) {
+            uri = data.getData();
+            Glide.with(Editar_objeto.this).load(uri).into(foto);
+            codigo = 2;
+
+            infoComp = new info_CompProfile(Editar_objeto.this);
+            infoComp.show();
+        }
     }
 
     private Uri getImageUri(Context context, Bitmap inImage) {
@@ -349,7 +346,7 @@ public class Agregar_objeto_catalogo extends Base_Activity {
 
     @Override
     public int cargarLayout() {
-        return R.layout.activity_agregar_objeto_catalogo;
+        return R.layout.activity_editar_objeto;
     }
 
     @Override

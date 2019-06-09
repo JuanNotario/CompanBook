@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Catalogo_Empresa_Elegida"></activity>
+        <activity android:name=".Editar_objeto"></activity>
+        <activity android:name=".Catalogo_Empresa_Elegida" />
         <activity android:name=".Informacion_Empresa" />
         <activity android:name=".Lista_Empresas" />
         <activity android:name=".Agregar_objeto_catalogo" />

@@ -33,28 +33,33 @@
         android:textSize="30sp"
         app:fontFamily="casual" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/usersTabs"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:scaleX="1"
-        android:scaleY="1"
-        app:tabIndicatorColor="@color/colorPrimary">
+        android:orientation="horizontal">
 
-        <android.support.design.widget.TabItem
-            android:id="@+id/tabFiltrado"
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/background_light"
+            android:onClick="filtrarCatEleg"
+            android:text="Buscar" />
+
+        <Button
+            android:id="@+id/btnTodos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filtrar" />
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="mostrarTodasEleg"
+            android:text="Mostrar Todos" />
+    </LinearLayout>
 
-        <android.support.design.widget.TabItem
-            android:id="@+id/tabItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/buscar" />
-
-    </android.support.design.widget.TabLayout>
+    <View
+        android:id="@+id/divider38"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCatEmprElg"

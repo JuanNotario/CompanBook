@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class Informacion_Empresa extends Base_Activity {
+public class Informacion_Empresa extends AppCompatActivity {
 
     ImageView ivLogo;
     TextView nombre;
@@ -30,7 +30,7 @@ public class Informacion_Empresa extends Base_Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_informacion__empresa);
+        setContentView(R.layout.activity_informacion__empresa);
 
         adapter = new AdaptadorListaEmpresas(datos, this);
         u = getIntent().getParcelableExtra("CLAVE");
@@ -57,15 +57,5 @@ public class Informacion_Empresa extends Base_Activity {
         startActivity(i);
         System.out.println("4");
 
-    }
-
-    @Override
-    public int cargarLayout() {
-        return R.layout.activity_informacion__empresa;
-    }
-
-    @Override
-    public boolean setDrawer() {
-        return true;
     }
 }

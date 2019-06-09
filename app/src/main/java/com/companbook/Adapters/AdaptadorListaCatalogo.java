@@ -71,7 +71,7 @@ public class AdaptadorListaCatalogo extends RecyclerView.Adapter<AdaptadorListaC
 
         public void bindMensaje(Catalogo m){
             tvNombre.setText(m.getNombre());
-            tvPrecio.setText(m.getPrecio() + "");
+            tvPrecio.setText(m.getPrecio() + " €");
             Glide.with(contexto).load(m.getUrl_foto()).into(fotoObj);
         }
     }

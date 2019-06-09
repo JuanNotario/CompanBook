@@ -8,13 +8,15 @@ public class Catalogo implements Parcelable {
     String nombre;
     String referencia;
     String desc;
+    int random;
     Double precio;
     String url_foto;
     String palabraClave;
     String potencia;
     String tamaño;
 
-    public Catalogo(String uid, String nombre, String referencia, String desc, Double precio, String url_foto, String palabraClave, String potencia, String tamaño) {
+    public Catalogo(int random, String uid, String nombre, String referencia, String desc, Double precio, String url_foto, String palabraClave, String potencia, String tamaño) {
+        this.random = random;
         this.uid = uid;
         this.nombre = nombre;
         this.referencia = referencia;
@@ -30,6 +32,7 @@ public class Catalogo implements Parcelable {
     }
 
     protected Catalogo(Parcel in) {
+        random = in.readInt();
         uid = in.readString();
         nombre = in.readString();
         referencia = in.readString();
@@ -52,6 +55,10 @@ public class Catalogo implements Parcelable {
             return new Catalogo[size];
         }
     };
+
+    public int getRandom() {
+        return random;
+    }
 
     public String getUid() {
         return uid;
@@ -96,6 +103,7 @@ public class Catalogo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(random);
         dest.writeString(uid);
         dest.writeString(nombre);
         dest.writeString(referencia);

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingTop="20dp"
+    android:paddingRight="@dimen/PADDING_30"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Introduzca la palabra clave: "
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp" />
+
+    <View
+        android:id="@+id/divider32"
+        android:layout_width="470dp"
+        android:layout_height="35dp" />
+
+    <EditText
+        android:id="@+id/etPalClave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Palabra clave"
+        android:inputType="textPersonName" />
+
+    <View
+        android:id="@+id/divider34"
+        android:layout_width="272dp"
+        android:layout_height="28dp" />
+
+    <Button
+        android:id="@+id/btnAcpFiltro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Botones"
+        android:text="Aceptar" />
+
+    <View
+        android:id="@+id/divider33"
+        android:layout_width="269dp"
+        android:layout_height="14dp" />
+
+    <Button
+        android:id="@+id/btnCancelFilt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Botones"
+        android:text="Cancelar" />
+</LinearLayout>

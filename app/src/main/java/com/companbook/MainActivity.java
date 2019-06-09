@@ -75,24 +75,31 @@ public class MainActivity extends AppCompatActivity {
                         String txtEmail = tvEmail.getText().toString();
                         String txtPass = tvPass.getText().toString();
 
-                        mAuth.signInWithEmailAndPassword(txtEmail, txtPass)
-                                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(MainActivity.this, "Se ha iniciado sesión correctamente", Toast.LENGTH_SHORT).show();
+                        if (txtEmail.trim().equals("") || txtPass.trim().equals("")) {
 
-                                            Intent intent = new Intent(MainActivity.this, Activity_Inicio_Empresas.class);
-                                            startActivity(intent);
+                            Toast.makeText(MainActivity.this, "Deben rellenarse todos los campos", Toast.LENGTH_SHORT).show();
 
-                                            System.out.println("EMAIL");
-                                            System.out.println(mAuth.getCurrentUser().getEmail());
+                        } else {
 
-                                        } else {
-                                            Toast.makeText(MainActivity.this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show();
+                            mAuth.signInWithEmailAndPassword(txtEmail, txtPass)
+                                    .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(MainActivity.this, "Se ha iniciado sesión correctamente", Toast.LENGTH_SHORT).show();
+
+                                                Intent intent = new Intent(MainActivity.this, Activity_Inicio_Empresas.class);
+                                                startActivity(intent);
+
+                                                System.out.println("EMAIL");
+                                                System.out.println(mAuth.getCurrentUser().getEmail());
+
+                                            } else {
+                                                Toast.makeText(MainActivity.this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }
                     }
                 });
 
